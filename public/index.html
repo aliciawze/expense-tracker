@@ -916,11 +916,12 @@
         const editBtn = e.target.closest("[data-action=edit]");
         const delBtn  = e.target.closest("[data-action=delete]");
         if (editBtn) {
-          const rec = cache.find((x) => x.id === editBtn.dataset.id);
+          const rec = cache.find((x) => x.id === Number(editBtn.dataset.id));
+
           if (rec) openModal(rec);
         } else if (delBtn) {
-          pendingDeleteId = delBtn.dataset.id;
-          const rec = cache.find((x) => x.id === pendingDeleteId);
+          pendingDeleteId = Number(delBtn.dataset.id);
+          const rec = cache.find((x) => x.id === Number(pendingDeleteId));
           els.confirmMessage.textContent = rec
             ? `Delete "${rec.title}" (${formatMoney(rec.amount)})? This cannot be undone.`
             : "Delete this expense? This cannot be undone.";
