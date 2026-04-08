@@ -171,7 +171,7 @@
     }
 
     .chart-wrap {
-      height: 180px;
+      height: 300px;
       display: flex;
       align-items: flex-end;
       gap: 6px;
@@ -632,7 +632,7 @@
       function formatMoney(n) {
         return new Intl.NumberFormat(undefined, {
           style: "currency",
-          currency: "USD",
+          currency: "AUD",
           maximumFractionDigits: 2,
         }).format(n);
       }
