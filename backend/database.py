@@ -1,6 +1,7 @@
 from sqlmodel import create_engine, SQLModel, Session
 
-DATABASE_URL = "mysql+pymysql://root:chocoW33@localhost:3306/expense_tracker"
+import os
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 engine = create_engine(DATABASE_URL)
 
