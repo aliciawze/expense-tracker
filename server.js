@@ -1,15 +1,18 @@
-const express = require('express');
+require('dotenv').config();
+const express = require('express'); 
 const mysql = require('mysql2/promise');
 const path = require('path');
 
-const app = express();
+const app = express(); // creates the Express application 
+
+
 
 const pool = mysql.createPool({
-  host: 'localhost',
-  port: 3306,
-  user: 'root',
-  password: 'chocoW33',
-  database: 'expense_tracker',
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   waitForConnections: true,
   connectionLimit: 10,
 });
@@ -39,7 +42,7 @@ app.get('/api/expenses', async (req, res) => {
 });
 
 // POST create expense
-app.post('/api/expenses', async (req, res) => {
+app.post('/api/expenses', async (req, res) => { 
   const { title, category, amount, expense_date, description } = req.body;
   if (!title || !category || !amount || !expense_date) {
     return res.status(400).json({ error: 'title, category, amount, and expense_date are required' });
@@ -91,5 +94,5 @@ app.delete('/api/expenses/:id', async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Expense Tracker running at http://localhost:${PORT}`);
+  console.log(`Expense Tracker running at http://localhost:${PORT}`); 
 });

@@ -10,20 +10,18 @@ Managing personal finances can be difficult without a clear view of where money 
  
 | Layer | Technology |
 |---|---|
-| Frontend | HTML, CSS, JavaScript (Vanilla) |
+| Frontend | HTML, CSS, JavaScript |
 | Styling | Custom CSS with dark theme |
 | Backend | Python (FastAPI), Node.js (static file server) |
 | ORM | SQLModel |
-| Database | MySQL (via PyMySQL driver) |
-| Routing | FastAPI REST API endpoints |
-| Deployment | Local (localhost) |
+| Database | MySQL (`mysql2/promise`) |
  
 ## Features
  
 - Add expense items with a title, category, amount, date, and description
 - Edit existing expense entries inline via a modal
 - Delete expense entries from the logbook
-- View all expenses in a sortable logbook table
+- View all expenses in a logbook table
 - Filter expenses by category
 - Dashboard overview showing all-time total, current month total, and entry count
 - Spending breakdown by category with amounts
@@ -33,19 +31,18 @@ Managing personal finances can be difficult without a clear view of where money 
 ## Folder Structure
  
 ```
-expense-tracker/
+EXPENSE-TRACKER/
 ├── public/
-│   └── index.html        # Single-page frontend (HTML, CSS, JavaScript)
-├── backend/
-│   ├── main.py           # FastAPI app and API route definitions
-│   ├── database.py       # Database connection and session management
-│   └── models.py         # SQLModel data models (Expense table schema)
-├── server.js             # Node.js static file server for the frontend
+│   └── index.html        # Single-page frontend (HTML + CSS + JS)
+├── server.js             # Express backend & API routes
+├── expense_tracker.sql   # MySQL database export
 ├── package.json          # Node.js dependencies
+├── .gitignore
 └── README.md
-```
- 
+ ```
+
 ## Challenges Overcome
  
-One of the main challenges was designing the API to support both individual expense operations and aggregated summary data (such as category totals and monthly trends) within a single cohesive backend. Structuring the FastAPI routes cleanly while keeping the frontend fully decoupled required careful planning of the data responses. Another challenge was building the monthly bar chart purely in vanilla JavaScript without a charting library, which involved dynamically scaling bar heights relative to the maximum monthly value. Integrating FastAPI with a MySQL database using SQLModel also required resolving driver compatibility issues with PyMySQL and ensuring the database tables were correctly initialised on server startup. Finally, keeping the application behaving as a true single-page app — with all CRUD operations reflected instantly without any page reload — required disciplined use of the Fetch API and dynamic DOM manipulation throughout.
+One of the main challenges was learning about node.js and deciding my stack between using Node.js + Express or FastAPI as though in lectures and tutorials. There were also confusion for each backend technology purpose and created redundant files that were realised late into the project. It was also challenging to decide what are essential features, it took research to finalise what was essential during the timeframe of this assignment. Along with maintaining it a single-page app, without any page reload. A type mismatch between fronend and MySQL casued bugs where comparisons and calculations failed. It was solved by writing the formatExpense() helper to normalise rows before sending it to the frontend. Another challenge was accidentally forgetting .gitignore when committing to GitHub which uploaded the file node_module, taking a long time.
+
  
